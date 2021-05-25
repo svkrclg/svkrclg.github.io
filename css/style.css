@@ -49,22 +49,48 @@ html, body {
   min-height: 100%;
   background-color: #EEE2DC;
   font-family: 'Padauk', sans-serif;
-  
+}
+
+.page {
+  width: 100%;
+}
+
+.empty-gap {
+  background-color: #EEE2DC;
+  height: 15vmin;
+  text-align: center;
+}
+
+.header {
+  font-size: 4vmin;
+  padding-left: 3.5vmin;
+  background-color: #EEE2DC;
+}
+
+.content {
+  padding-left: 3.5vmin;
+  padding-right: 3.5vmin;
+  text-align: center;
+  font-size: 2.0vmin;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 
-#title {
+/* #title {
   font-size: 4vmin;
   padding-left: 3.5vmin;
-  width: 100%;
-  top: 0;
-  position: fixed;
   background-color: #EEE2DC;
   opacity: 1;
+  width: 100%;
+  position: fixed;
 }
 
 #about {
   padding-left: 3.5vmin;
-  margin-top: 60px;
   font-size: 2.0vmin;
-}
+} */

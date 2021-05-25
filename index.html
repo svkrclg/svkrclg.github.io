@@ -34,15 +34,36 @@
     </div>
     <div id="pages">
       <div class="page about">
-        <div id="title">
+        <div class="empty-gap"></div>
+        <div class="header" id="title">
           About
         </div>
-        <div id="about">      
-          Hello, I am Saurav Kumar, 2020 passed out batch from Army Institute of Technology, Pune. Studying computer engineering was my only choice ever since I was introduced to Java langauge in 8th standarad (ICSE board), and further opting computer Science as optional subject for my intermediate education where I got introduced to C++ and MySQL. This made me highly passionate about computer technologies and my four year of graduation was full of learning of new things and developing whatever came into my mind. In first year,I learned basic web development such as HTML, CSS , javascript and in backend it were things such as PHP, followed by Android Development and deploying apps in Play store in second year. The next two year was mix of android development and Java standalone application (Linux CLI based), and learning basic data structures and algorithms.
+        <div id="about" class="content">      
+           Hello, I am Saurav Kumar, 2020 passed out batch from Army Institute of Technology, Pune. Studying computer engineering was my only choice ever since I was introduced to Java langauge in 8th standarad (ICSE board), and further opting computer Science as optional subject for my intermediate education where I got introduced to C++ and MySQL. This made me highly passionate about computer technologies and my four year of graduation was full of learning of new things and developing whatever came into my mind. In first year,I learned basic web development such as HTML, CSS , javascript and in backend it were things such as PHP, followed by Android Development and deploying apps in Play store in second year. The next two year was mix of android development and Java standalone application (Linux CLI based), and learning basic data structures and algorithms.
         </div>
       </div>
     </div>
   </div>
+  <script>
+  window.onscroll = function() {myFunction()};
+
+  var header = document.getElementById("title");
+  var sticky = header.offsetTop;
+  
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      header.classList.add("sticky");
+      var content = document.getElementsByClassName("content");
+      var headerheight = header.offsetHeight;
+      console.log(headerheight, typeof headerheight);
+      content[0].style.paddingTop = `${header.offsetHeight}px`;
+    } else {
+      document.getElementsByClassName("content")[0].style.paddingTop = "0px";
+      header.classList.remove("sticky");
+    }
+  }
+  </script>
+
 </body>
 </html>
 
