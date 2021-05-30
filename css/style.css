@@ -21,6 +21,16 @@ html, body {
   cursor:pointer;  
 }
 
+hr { 
+  display:block;
+  border:none;
+  color:white;
+  height:2px;
+  margin-top: 50px;
+  background:black;
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(rgb(146, 141, 141)), to(rgba(0, 0, 0, 0)));
+}
+
 #contents {
   width: 20%;
   height: 100%;
@@ -55,16 +65,17 @@ html, body {
 
 .page{
   width: 100%;
+  display: none;
+  transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2s;
 }
 
 .header {
-  font-size: 4vmin;
   background-color: #EEE2DC;
   opacity: 1;
   margin-top: 10%;
 }
 
-.infos {
+.infos#about {
   font-size: 2.0vmin;
   text-align: center;
   padding-top: 50px;
@@ -73,4 +84,44 @@ html, body {
 .header, .infos {
   padding-right: 60px;
   padding-left: 60px;
+}
+
+.infos#project {
+font-size: 2.0vmin;
+padding-top: 50px;
+}
+
+ul.no-bullets {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+.project-title {
+  margin-top:0;
+  width: 100%;
+  text-align: center;
+}
+
+ul.no-bullets li, ul.no-bullets li h3 {
+  display: inline;
+}
+
+ul.no-bullets li.tag {
+  background-color: #333;
+  color: #fff;
+  border-radius: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.project-links-icon {
+  text-align: center;
+  padding-top: 30px;
+}
+
+.project-links-icon a {
+  padding-left: 10px;
+  padding-right: 10px;
 }
