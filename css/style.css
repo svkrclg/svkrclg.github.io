@@ -26,7 +26,7 @@ hr {
   border:none;
   color:white;
   height:2px;
-  margin-top: 50px;
+  margin-top: 30px;
   background:black;
   background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(rgb(146, 141, 141)), to(rgba(0, 0, 0, 0)));
 }
@@ -35,7 +35,7 @@ hr {
   width: 20%;
   height: 100%;
   float: left;
-  text-align:right;
+  text-align: center;
   background-color: #EDC7B7;
   position: fixed;
   font-family: 'Libre Franklin', sans-serif;
@@ -44,13 +44,27 @@ hr {
 #lists {
   position: absolute;
   top: 50%;
-  left: 70%;
-  transform: translate(-50%,-70%);
+  width: 100%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .list {
-  padding-bottom: 30%;
+  padding-bottom: 30px;
   font-size: 1.8vmin;
+}
+
+.contacts-btn {
+  width: 100%;
+  display: flex;
+}
+
+.btn-container {
+  margin: 0 auto;
+}
+
+.btn-container a {
+  padding: 5px;
 }
 
 #pages {
@@ -63,10 +77,15 @@ hr {
   margin-left: 20%;
 }
 
+
 .page{
   width: 100%;
   display: none;
   transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2s;
+}
+
+#pages .page .header h1 {
+  font-size: 3vmax;
 }
 
 .header {
@@ -101,6 +120,7 @@ ul.no-bullets {
 .project-title {
   margin-top:0;
   width: 100%;
+  font-size: 1.5vmax;
   text-align: center;
 }
 
@@ -125,3 +145,40 @@ ul.no-bullets li.tag {
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.page.skills .infos .skills .skill{
+  align-items: center;
+  padding: 1rem;
+}
+
+#skill-image {
+  text-align: center;
+}
+
+#skill-category {
+  text-align: center;
+  font-size: 3vmin;
+}
+
+#skill-set {
+  text-align: center;
+  color: #333;
+}
+
+.page.skills .infos .skills {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+  .page.skills .infos .skills  { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+  .page.skills .infos .skills  { grid-template-columns: repeat(3, 1fr); }
+}
+
