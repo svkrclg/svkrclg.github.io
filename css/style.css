@@ -21,6 +21,18 @@ html, body {
   cursor:pointer;  
 }
 
+#pages .page #about p a {
+  color: #7c4a24;
+  text-decoration: none;
+}
+
+#pages .page #about p a:hover {
+  color:#a07945; 
+  text-decoration:none; 
+  cursor:pointer;  
+}
+
+
 hr { 
   display:block;
   border:none;
@@ -66,6 +78,43 @@ hr {
 .btn-container a {
   padding: 5px;
 }
+.intro {
+  margin-top: 10%;
+}
+
+.intro .my-image img{
+  border-radius: 50%;
+}
+
+.my-name {
+  font-size: 3vmin;
+}
+
+.download-cv {
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  margin-bottom: 10%;
+}
+
+.download-cv a{
+  border-radius: 4px;
+  color: #000;
+  border: 1px solid #000;
+  padding: 12px 25px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all .5s ease;
+  background-color: transparent;
+}
+
+.download-cv a:hover {
+  background-color: #ffffff;
+  color: #000;
+}
 
 #pages {
   width:80%;
@@ -81,7 +130,6 @@ hr {
 .page{
   width: 100%;
   display: none;
-  transition: all 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) 2s;
 }
 
 #pages .page .header h1 {
@@ -106,8 +154,8 @@ hr {
 }
 
 .infos#project {
-font-size: 2.0vmin;
-padding-top: 50px;
+  font-size: 2.0vmin;
+  padding-top: 50px;
 }
 
 ul.no-bullets {
