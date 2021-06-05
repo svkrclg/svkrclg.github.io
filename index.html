@@ -9,6 +9,7 @@
 <body>
   <div>
     <div id="contents">
+      <span class = "close-btn" style="padding-top:10px;font-size:30px;cursor:pointer;text-decoration: none;" onclick="closeNav()">&times;</span>
       <div class = "intro">
         <div class = "my-image">
           <img src="./img/saurav.jpg">
@@ -55,13 +56,14 @@
     </div>
 
     <div id="pages">
+      <span class = "open-btn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
       <div class="page about">
         <div class="header" id="title">
           <h1>About</h1>
         </div>
         <div class="infos" id="about">      
           <p>Hello! I'm Saurav kumar, a Software Engineer who likes playing with codes and building tools that might some users or at least me. I completed my Bachelor of Engineering in Computer Science from Army Institute of Technology, Pune.</p>
-          <p>I enjoy taking complex problems and structure them into a beautiful, significant design. I am working in <a href="https://browerstack.com"><b>BrowserStack</b></a> as my first company to provide an easy and stable way for users to measure the cross-browser performance of websites (known as <a href="https://browerstack.com/speedlab"><b>Speedlab</b></a>).</p>
+          <p>I enjoy taking complex problems and structure them into a beautiful, significant design. I am working in <a href="https://browserstack.com"><b>BrowserStack</b></a> as my first company to provide an easy and stable way for users to measure the cross-browser performance of websites (known as <a href="https://browserstack.com/speedlab"><b>Speedlab</b></a>).</p>
           <p>Apart from work, I enjoy playing CSGO (also stream on <a href="https://www.twitch.tv/svkrclg"><b>Twitch</b></a>), photography, and riding bikes. I like train travel and walking at night.</p>
         </div>
       </div>
@@ -272,9 +274,14 @@
   
   </div>
   <script>
+    var isNavOpened = false;
     window.onhashchange = loadHash;
-    loadHash();
-    function loadHash() {
+    loadHash(true);
+    function loadHash(started) {
+      console.log("called");
+      if (!started || isNavOpened) {
+        closeNav();
+     }
       var pages = document.getElementsByClassName('page');
       for (var i = 0; i<pages.length; i++)
         pages[i].style.display = 'none';
@@ -296,6 +303,20 @@
       pageElement.style.display = 'block';
     }
     
+    function openNav() {
+      console.log("openNav");
+      isNavOpened = true;
+      document.getElementById("contents").style = "width: 100%; z-index: 100; display: block;"
+      document.getElementById("pages").style = "display: none;"
+    }
+
+    function closeNav() {
+      console.log("closeNav");
+      isNavOpened = false;
+      document.getElementById("contents").style= "width: 0%;"
+      document.getElementById("pages").style = "display: block;"
+    }
+
   </script>
 
 </body>
