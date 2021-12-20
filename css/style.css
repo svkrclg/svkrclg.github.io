@@ -224,12 +224,14 @@ ul.no-bullets li.tag {
 
 /* Screen larger than 600px? 2 column */
 @media (min-width: 600px) {
-  .page.skills .infos .skills  { grid-template-columns: repeat(2, 1fr); }
+  .page.skills .infos .skills { grid-template-columns: repeat(2, 1fr); }
+  .page.blogs .infos .blogs { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Screen larger than 900px? 3 columns */
 @media (min-width: 900px) {
-  .page.skills .infos .skills  { grid-template-columns: repeat(3, 1fr); }
+  .page.skills .infos .skills { grid-template-columns: repeat(3, 1fr); }
+  .page.blogs .infos .blogs { grid-template-columns: repeat(3, 1fr); }
 }
 
 #pages .open-btn {
@@ -306,4 +308,47 @@ ul.no-bullets li.tag {
     width: 30px;
     height: 30px;
   }
+}
+
+/* CSS for blog section */
+.page.blogs .infos .blogs .blog {
+  background-color: #edc7b79a;
+  align-items: center;
+  border-radius: 5%;
+}
+
+.page.blogs .infos .blogs {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.page.blogs .infos .blogs .skill{
+  align-items: center;
+  padding: 1rem;
+}
+
+#blog-image {
+  text-align: center;
+}
+
+#blog-image img {
+  border-radius: 5%;
+}
+
+#blog-title-and-link {
+  text-align: center;
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+#blog-source-and-date {
+  text-align: center;
+  color: #333;
+}
+
+#blog-title-and-link a {
+  color: black;
+  text-decoration: none; /* no underline */
 }
