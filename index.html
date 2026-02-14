@@ -1,379 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Saurav Kumar</title>
-  <link rel="icon" href="https://img.icons8.com/windows/32/000000/tree.png" type="image/icon type">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="./css/style.css">
-  </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Lily 🩷</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Quicksand:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
-  <div>
-    <div id="contents">
-      <span class = "close-btn" style="padding-top:10px;font-size:30px;cursor:pointer;text-decoration: none;" onclick="closeNav()">&times;</span>
-      <div class = "intro">
-        <div class = "my-image">
-          <img src="./img/saurav.jpg">
-        </div>
-        <div class = "my-name">
-          <span>Saurav Kumar</span> 
-        </div>
-      </div>
-      
-      <div id="lists">
-        <div class="list about">
-          <a href="#about">
-            About
-            </a>
-        </div> 
-        <div class="list projects">
-          <a href="#projects">
-          Projects
-          </a>
-        </div> 
-        <div class="list skills">
-          <a href="#skills">
-            Skills
-          </a>
-        </div> 
-        <div class="list blogs">
-          <a href="#blogs">
-            Blogs
-          </a>
-        </div> 
-        <div class="list photography">
-          <a href="#photography">
-            Photography
-          </a>
+
+    <!-- 3D Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Main Content Overlay -->
+    <div id="app">
+        <!-- Couple Animation Container -->
+        <div id="couple-container"
+            style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;">
+            <svg id="couple-svg" style="position: absolute; width: 100%; height: 100%;">
+                <line id="couple-line" x1="0" y1="0" x2="0" y2="0" stroke="#ff4d6d" stroke-width="3"
+                    stroke-dasharray="10, 5" />
+            </svg>
+            <!-- Couple Images: Using object-fit cover/contain via style or class if needed -->
+            <!-- Adding border-radius: 50% for circular look often looks better for profiles, but keeping square for now as requested -->
+            <img id="img-her" src="her.png" class="couple-img sway-anim"
+                style="position: absolute; top: 20px; left: 20px; width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #ff4d6d; transition: left 1s ease, top 1s ease;">
+            <img id="img-his" src="his.png" class="couple-img sway-anim-delayed"
+                style="position: absolute; top: 20px; right: 20px; width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #ff4d6d; transition: right 1s ease, top 1s ease;">
         </div>
 
-        <div class = "contacts-btn">
-          <div class = "btn-container">
-            <a href="https://www.linkedin.com/in/svkrclg/"><img src="./img/linkedin.png" width="30px" height="30px"/></a>
-            <a href="https://github.com/svkrclg"><img src="./img/gh.png" width="30px" height="30px"></a>
-            <a href="https://stackoverflow.com/users/8510117/saurav-kumar"><img src="./img/stof.png" width="30px" height="30px"></a>
-            <a href="https://twitter.com/svkrait"><img src="./img/twitter.png" width="30px" height="30px"></a>
-          </div>
+        <!-- Intro Screen -->
+        <div id="screen-intro" class="screen active">
+            <h1 class="title">Hello my devi <span class="girl-name">Lily</span>!</h1>
+            <p class="subtitle">Apke liye chotu sa gift...</p>
+            <img src="sticker1.png" alt="Shinchan" class="sticker float-anim" style="max-width: 150px;">
+            <br>
+            <button class="btn-primary" onclick="startGame()">Pup Ready? 🩷</button>
         </div>
-      </div>
 
-      <div class = "download-cv">
-        <a href="./resume.pdf">DOWNLOAD CV</a>
-      </div>
+        <!-- Facts Screen (Replaces Quiz) -->
+        <div id="screen-facts" class="screen hidden">
+            <div class="score-board">Fact <span id="fact-count">1</span>/5 🩷</div>
+            <div class="card">
+                <h2 id="fact-question">Question loading...</h2>
+
+                <div id="fact-reveal-area" class="hidden">
+                    <h1 class="fact-answer" id="fact-answer">Answer</h1>
+                    <p class="fact-conclusion" id="fact-conclusion">Conclusion</p>
+                </div>
+
+                <div class="options">
+                    <button id="btn-reveal" class="btn-primary" onclick="revealFact()">Reveal 🫣</button>
+                    <button id="btn-next-fact" class="btn-secondary hidden" onclick="nextFact()">Next ❤️</button>
+                </div>
+            </div>
+            <img id="quiz-sticker" src="zaemon-3.png" alt="Buri Buri" class="sticker hidden"
+                style="width: 100px; position: absolute; bottom: -50px; right: -20px;">
+        </div>
+
+        <!-- Proposal Screen -->
+        <div id="screen-proposal" class="screen hidden">
+            <h1 class="title">One last question...</h1>
+            <h2 class="subtitle">Will you be my Valentine? 🌹</h2>
+            <img src="sticker2.png" class="sticker" style="width: 120px; margin-bottom: 20px;">
+            <div class="proposal-buttons">
+                <button id="btn-yes" class="btn-primary">Yes, Always! 💖</button>
+                <button id="btn-no" class="btn-secondary">Not Interested</button>
+            </div>
+        </div>
+
+        <!-- Celebration Screen -->
+        <div id="screen-celebration" class="screen hidden">
+            <h1 class="title">YAYYYYY! 🎉</h1>
+            <p class="subtitle">Ofc I knew it! Since you my fav girl in entire universe.. kissses <span
+                    class="girl-name">Lily</span>! 🩷</p>
+            <div class="stickers-container">
+                <img src="sticker3.png" class="sticker bounce-anim" style="width: 150px;">
+                <img src="zaemon-2.png" class="sticker bounce-anim" style="width: 150px; animation-delay: 0.2s;">
+                <img src="zaemon-3.png" class="sticker bounce-anim" style="width: 150px; animation-delay: 0.4s;">
+            </div>
+            <p class="signature">- <span class="boy-name">Tom</span></p>
+            <button class="btn-primary" onclick="restart()">Replay ↺</button>
+        </div>
     </div>
 
-    <div id="pages">
-      <span class = "open-btn" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-      
-      <div class="page about">
-        <div class="header" id="title">
-          <h1>About</h1>
-        </div>
-        <div class="infos" id="about">      
-          <p>Hello, fellow explorer! I’m Saurav Kumar (also known as Rival), a software developer with a knack for building things that matter. I’m not here to claim genius status or parade a pocket protector—I’m just someone who genuinely enjoys the craft of coding and the excitement of creating solutions from scratch.</p>
-          <p>What draws me to development? It might be the challenge of tackling new problems, the rush when a solution finally clicks, or simply watching ideas transform into working products. Every day brings something different, and that’s what keeps me hooked.</p>
-          <p>Currently, at Zepto, I’m working on features that power the brand portal—like tools that let our teams experience the dashboard as customers do, and data platforms that deliver real-time business analytics at scale. Building systems that are both robust and lightning fast is what I do best.</p>
-          <p>I’m always open to swapping stories about ambitious system design or brainstorming clever engineering strategies. If you have an interesting idea to share or need a hand with your next project, let’s connect and think big together.</p>
-        </div>
-      </div>
-
-      <div class="page projects">
-        <div class="header" id="title">
-          <h1>Projects</h1>
-        </div>
-        
-        <div class="infos" id="project">
-          <div class="project-title">
-            <h2 style="margin-top:0">Algoview</h2>
-          </div>
-          <div class="project-detail">
-            <ul>
-              <li>Visualize the basic algorithms of pathfinding and sorting with animation.</li>
-              <li>Easy to understand and control the animation according to your wish like increasing the speed of animation, go to a specific position, watch each step of the algorithm at a time, etc.</li>
-              <li>The pathfinding algorithms currently included in the app are: Breadth-First Search, Depth- First Search, A-star search, Dijkstra's algorithm              </li>
-              <li>Sorting Algorithms includes: Merge Sort, Heap Sort, Bubble Sort, Selection Sort, Quick Sort Insertion Sort.</li>
-            </ul>
-          </div>
-          <div class="project-tags">
-            <ul class="no-bullets">
-              <li><h3>Tags: </h3></li>
-              <li class="tag">Android</li>
-              <li class="tag">Java</li>
-              <li class="tag">Data structures</li>
-              <li class="tag">Algorithms</li>
-            </ul>
-          </div>
-          <div class="project-links-icon">
-            <a href="https://github.com/svkrclg/AlgoView"><img src="https://img.icons8.com/material-sharp/48/000000/github.png" width="50" height="50"/></a>
-            <a href="https://play.google.com/store/apps/details?id=com.rival.algoview"><img src="./img/playstore.png" width="45" height="45"/></a>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="infos" id="project">
-          <div class="project-title">
-            <h2 style="margin-top:0">GoDrive</h2>
-          </div>
-          <div class="project-detail">
-            <ul>
-              <li>A command line tool to upload files to your Google drive account.</li>
-              <li>It uses the Google OAuth 2.0 to obtain the end user's Access Token and send a POST request to Google drive API.</li>
-              <li>By default it also changes the permission of the uploaded to make it accessible to everyone with the link.</li>
-            </ul>
-          </div>
-          <div class="project-tags">
-            <ul class="no-bullets">
-              <li><h3>Tags: </h3></li>
-              <li class="tag">Java</li>
-              <li class="tag">Nodejs</li>
-              <li class="tag">OAuth 2.0</li>
-              <li class="tag">Apache CLI tools</li>
-              <li class="tag">Linux Shell scripting</li>
-              <li class="tag">HTTP</li>
-            </ul>
-          </div>
-          <div class="project-links-icon">
-            <a href="https://github.com/svkrclg/goDrive"><img src="https://img.icons8.com/material-sharp/48/000000/github.png" width="50" height="50"/></a>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="infos" id="project">
-          <div class="project-title">
-            <h2 style="margin-top:0">JParallel Download</h2>
-          </div>
-          <div class="project-detail">
-            <ul>
-              <li>Java application to download a parts of file in parallel, using multithreading.</li>
-              <li>Different threads request for a specific segment of data.</li>
-              <li>After all the thread finish downloading, all the parts are concated.</li>
-            </ul>
-          </div>
-          <div class="project-tags">
-            <ul class="no-bullets">
-              <li><h3>Tags: </h3></li>
-              <li class="tag">Java</li>
-              <li class="tag">Linux Shell scripting</li>
-              <li class="tag">Multithreading</li>
-              <li class="tag">HTTP</li>
-            </ul>
-          </div>
-          <div class="project-links-icon">
-            <a href="https://github.com/svkrclg/JParallelDownload"><img src="https://img.icons8.com/material-sharp/48/000000/github.png" width="50" height="50"/></a>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="infos" id="project">
-          <div class="project-title">
-            <h2 style="margin-top:0">Meme Shop</h2>
-          </div>
-          <div class="project-detail">
-            <ul>
-              <li>Android application to search and generate memes</li>
-              <li>Client-server architecture with all the meme stored in S3 and server side in Python</li>
-              <li>Simplified and intituative UI</li>
-            </ul>
-          </div>
-          <div class="project-tags">
-            <ul class="no-bullets">
-              <li><h3>Tags: </h3></li>
-              <li class="tag">Android</li>
-              <li class="tag">Python</li>
-              <li class="tag">AWS S3/EC2</li>
-            </ul>
-          </div>
-          <div class="project-links-icon">
-            <a href="https://github.com/svkrclg/memers"><img src="https://img.icons8.com/material-sharp/48/000000/github.png" width="50" height="50"/></a>
-            <a href="https://play.google.com/store/apps/details?id=com.rival.canvasmeme"><img src="./img/playstore.png" width="45" height="45"/></a>
-          </div>
-        </div>
-        
-        
-      </div>
-
-      <div class="page skills">
-        <div class="header" id="title">
-          <h1>Skills</h1>
-        </div>
-        <div class="infos" id="skills">      
-          <div class="skills">
-            <div class="skill">
-              <div id = "skill-image">
-                 <img src="./img/code.png" width="50" height="50" >
-              </div>
-              <div id = "skill-category">
-                Languages
-              </div>
-              <div id = "skill-set">
-                GoLang, Java, C++, Javascript, Ruby, Bash Script
-              </div>
-            </div>
-            <div class="skill">
-              <div id = "skill-image">
-                <img src="./img/docker.png" width="50" height="50" >
-             </div>
-             <div id = "skill-category">
-               Devops
-             </div>
-             <div id = "skill-set">
-               Ansible, ArgoCD, Docker, Github
-             </div>
-            </div>
-            <div class="skill">
-              <div id = "skill-image">
-                <img src="./img/database.png" width="50" height="50" >
-             </div>
-             <div id = "skill-category">
-               Databases
-             </div>
-             <div id = "skill-set">
-               Mysql, Postgres, MongoDB, Redis
-             </div>
-            </div>
-            <div class="skill">
-              <div id = "skill-image">
-                <img src="./img/web.png" width="50" height="50" >
-             </div>
-             <div id = "skill-category">
-               Web Development
-             </div>
-             <div id = "skill-set">
-               Ruby on Rails, Basic HTML + CSS, Javascript and Hosting
-             </div>
-            </div>
-            <div class="skill">
-              <div id = "skill-image">
-                <img src="./img/cloud.png" width="50" height="50" >
-             </div>
-             <div id = "skill-category">
-               Cloud Services
-             </div>
-             <div id = "skill-set">
-               Starrocks, Clickhouse, AWS (EC2, S3), Azure VM
-             </div>
-            </div>
-            <div class="skill">
-              <div id = "skill-image">
-                <img src="./img/other.png" width="50" height="50" >
-             </div>
-             <div id = "skill-category">
-               Others
-             </div>
-             <div id = "skill-set">
-               DS and Algo, Android Studio, Linux, NGINX, Open source Contribution
-             </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="page blogs">
-        <div class="header" id="title">
-          <h1>Blogs</h1>
-        </div>
-        <div class="infos" id="blogs"> 
-          <div class="blogs">
-            <div class="blog">
-              <div id = "blog-image">
-                <img src="./img/http_blog.png" width="380px" height="220px">
-             </div>
-             <div id = "blog-title-and-link">
-                <a href="https://medium.com/@svkrclg/building-http-server-from-scratch-e7f47dd93e6c" target="_blank">
-                  Understanding and building HTTP server from scratch.
-                </a>
-             </div>
-             <div id = "blog-source-and-date">
-               19th Dec, 2021 - Medium
-             </div>
-            </div>
-
-            <div class="blog">
-              <div id = "blog-image">
-                <img src="./img/grpc.png" width="380px" height="220px">
-             </div>
-             <div id = "blog-title-and-link">
-                <a href="https://svkrclg.medium.com/grpc-load-balancing-using-envoy-e8972214da2c" target="_blank">
-                  GRPC load balancing using Envoy (with practical).
-                </a>
-             </div>
-             <div id = "blog-source-and-date">
-               28th Jan, 2023 - Medium
-             </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="page photography">
-        <div class="header" id="title">
-          <h1>Photography</h1>
-        </div>
-        <div class="infos" id="photography">      
-           <a href="http://instagram.com/svkrclg" target="_blank">Check out my insta</a>
-        </div>
-      </div>
-    </div>
-  
-  </div>
-  <script>
-    var isNavOpened = false;
-    window.onhashchange = loadHash;
-    loadHash(true);
-    function loadHash(started) {
-      if (!started || isNavOpened) {
-        closeNav();
-     }
-      var pages = document.getElementsByClassName('page');
-      for (var i = 0; i<pages.length; i++)
-        pages[i].style.display = 'none';
-      
-      var pages = document.getElementsByClassName('list');
-      for (var i = 0; i<pages.length; i++)
-        pages[i].firstElementChild.style.color = '#000';
-      
-      hashParam = location.hash.substring(1);
-      pageElement = document.getElementsByClassName(`page ${hashParam}`)[0];
-      menuOption = document.getElementsByClassName(`list ${hashParam}`)[0];
-      if (pageElement == undefined) {
-        pageElement = document.getElementsByClassName(`page about`)[0];
-        menuOption = document.getElementsByClassName(`list about}`)[0];
-        location.hash = '#about';
-      }
-      menuOption.firstElementChild.style.color = "#00000073"
-      pageElement.style.display = 'block';
-      // for filling bottom white space when view port height change
-      wh = window.innerHeight;
-      page = document.getElementById("pages");
-      pageHeight = page.offsetHeight;
-      console.log(wh, pageHeight);
-      if (wh > pageHeight) {
-        percentage = ((wh - pageHeight) / pageHeight) *100;
-        console.log(`${100+percentage}%`);
-        page.style.height = `${100+percentage}%`;
-      }
-    }
-    
-    function openNav() {
-      console.log("openNav");
-      isNavOpened = true;
-      document.getElementById("contents").style = "display: block;"
-      document.getElementById("pages").style = "display: none;"
-    }
-
-    function closeNav() {
-      console.log("closeNav");
-      isNavOpened = false;
-      document.getElementById("contents").style= "display; none"
-      document.getElementById("pages").style = "display: block;"
-    }
-
-  </script>
-
+    <!-- Scripts -->
+    <script type="module" src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </body>
+
 </html>
-
-
-
